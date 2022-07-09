@@ -1,22 +1,10 @@
 module Template where
 
-data Name = N String
-    deriving (Show)
-
-data Pair = MkPair Int Int
-    deriving (Show)
-
-data Gender = Male|Female|Other
-    deriving (Show)
-
-data Person = MkPerson Name Int Gender 
-    deriving (Show)
-
-data TestResult 
-    = Pass Int
-    | Fail [String]
-    deriving (Show)
-
+newtype Name = Name String deriving (Show)
+newtype Pair = Pair (Int, Int) deriving (Show)
+data Gender =  Female | Male | Other deriving (Show, Eq)
+data Person = Person Name Int Gender deriving (Show)
+data TestResult = Pass { score :: Int } | Fail { list_comments :: [String] } deriving (Show)
 
 stringToGender :: String -> Gender
 stringToGender gender
@@ -24,22 +12,23 @@ stringToGender gender
     | gender == "Female" = Female
     | otherwise = Other
 
-genderToString :: Gender -> String
-genderToString Male = "Male"
-genderToString Female = "Female"
-genderToString Other = "Other"
-
+genderToSTring :: Gender -> String
+genderToSTring Male = "Male"
+genderToSTring Female = "Female"
+genderToSTring Other = "Other"
 
 passing :: Int -> TestResult
-passing x = Pass x
+passing = Pass
 
 failing :: [String] -> TestResult
-failing list = Fail list
+failing = Fail
 
 grade :: TestResult -> Int
 grade (Pass x) = x
-grade (Fail list) = 0
+grade (Fail x) = 0
 
 comments :: TestResult -> [String]
-comments (Fail list) = list
 comments (Pass x) = []
+comments (Fail x) = x
+
+

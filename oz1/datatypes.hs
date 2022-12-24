@@ -1,4 +1,4 @@
-module Tempale where
+module Template where
 
 data Name = MkName String
     deriving (Show)
@@ -6,7 +6,7 @@ data Name = MkName String
 data Pair = MkPair Int Int
     deriving (Show)
 
-data Gender = Male | Female
+data Gender = Male | Female | Other
     deriving (Show)
 
 data Person = MkPerson Name Int Gender
@@ -19,6 +19,7 @@ stringToGender :: String -> Gender
 stringToGender x
     | x == "Male" = Male
     | x == "Female" = Female
+    | otherwise = Other
 
 genderToString :: Gender -> String
 genderToString = show
@@ -35,4 +36,4 @@ grade (Fail x) = 0
 
 comments :: TestResult -> [String]
 comments (Fail l) = l
-comment (Pass l) = []
+comments (Pass l) = []

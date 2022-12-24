@@ -14,5 +14,39 @@ all' :: (Int -> Bool) -> [Int] -> Bool
 all' f = foldr' ((&&) . f) True
 
 map' :: (Int -> Int) -> [Int] -> [Int]
-map' f [] = []
-map' f (x:xs) = f x: map f xs
+map' f = foldr' ((:) . f) []
+
+filter' :: [Int] -> (Int -> Bool) -> [Int]
+filter' l f = foldr' (\x acc -> if f x then x: acc else acc) []
+
+-- * Given helpers
+
+even' :: Int -> Bool
+even' = even
+
+not' :: Bool -> Bool
+not' = not
+
+absolute' :: Int -> Int
+absolute' = abs
+
+greaterThanFive :: Int -> Bool
+greaterThanFive x = x > 5
+
+-- * Beginning Composer
+
+amountEven :: [Int] -> Int
+amountEven = length . filter even
+
+onlyOdd :: [Int] -> [Int]
+onlyOdd = filter odd
+
+absGtFive :: [Int] -> Int
+absGtFive = length . filter (greaterThanFive . abs)
+
+anyEvenGtFive :: [Int] -> Bool
+anyEvenGtFive = any greaterThanFive . filter even
+
+anyEvenGtFive' :: [Int] -> Bool
+anyEvenGtFive' = any greaterThanFive . filter even
+

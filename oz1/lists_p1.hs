@@ -8,12 +8,14 @@ count list
 myAnd :: [Bool] -> Bool
 myAnd list
     | null list = True
-    | otherwise = head list == myAnd (tail list)
+    | not (head list) = False
+    | otherwise = myAnd (tail list)
 
 myOr :: [Bool] -> Bool
-myOr list
-    | null list = True
-    | otherwise = head list || myOr (tail list)
+myOr [] = False
+myOr (x:xs)
+    | x = True
+    | otherwise = myOr xs
 
 append :: [Int] -> [Int] -> [Int]
 append l1 l2

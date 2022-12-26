@@ -1,10 +1,15 @@
 module Template where
 
 myProduct :: [Integer] -> Integer
-myProduct = error "not implemented"
+myProduct = product
 
 insert :: Int -> [Int] -> [Int]
-insert = error "not implemented"
+insert a [] = [a]
+insert a (x:xs)
+    | a <= x = a:x:xs
+    | otherwise = x: insert a xs
 
 myLast :: [Int] -> Int
-myLast = error "Not implemented"
+myLast (x:xs)
+    | null xs = x
+    | otherwise = myLast xs

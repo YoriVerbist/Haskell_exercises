@@ -31,10 +31,22 @@ fixShelves :: [Shelf] -> [Shelf]
 fixShelves = filter (not . null . (\(MkShelf _ authors) -> authors)) . map (\(MkShelf letter authors) -> MkShelf letter $ filter ((/=) letter . head) authors)
 
 elimContainsChar :: Char -> [String] -> [String]
-elimContainsChar = error "Not implemented"
+elimContainsChar l = filter (\s -> l `notElem` s)
 
 leetSpeak :: [String] -> [String]
-leetSpeak = error "Not implemented"
+leetSpeak = map (map repl)
+    where
+        repl 'a' = '4'
+        repl 'e' = '3'
+        repl 'i' = '1'
+        repl 'o' = '0'
+        repl 't' = '7'
+        repl 'A' = '4'
+        repl 'E' = '3'
+        repl 'I' = '1'
+        repl 'O' = '0'
+        repl 'T' = '7'
+        repl c = c
 
 isPalindrome :: String -> Bool
 isPalindrome = error "Not implemented"

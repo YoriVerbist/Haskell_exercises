@@ -49,7 +49,10 @@ leetSpeak = map (map repl)
         repl c = c
 
 isPalindrome :: String -> Bool
-isPalindrome = error "Not implemented"
+isPalindrome l = foldr (\x ys -> ys ++ [x]) [] temp == temp
+    where
+        temp = map toLower $ filter isAlphaNum l
+
 
 type Species = String
 type Length  = Float     -- in inches
@@ -58,4 +61,4 @@ data Fish = MkFish Species Length
   deriving (Eq, Show)
 
 viableFish :: [Fish] -> [String] -> [Fish]
-viableFish = error "Not implemented"
+viableFish fish invasive= filter (\(MkFish name len) -> name `notElem` invasive && len > 8) fish

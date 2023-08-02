@@ -12,3 +12,9 @@ any' f l = foldr' (\x acc -> (f x) || acc) False l
 
 all' :: (Int -> Bool) -> [Int] -> Bool
 all' f l = foldr' (\x acc -> (f x) && acc) True l
+
+map' :: (Int -> Int) -> [Int] -> [Int]
+map' f l = foldr' (\x acc -> f x : acc) [] l
+
+filter' :: [Int] -> (Int -> Bool) -> [Int]
+filter' l f = foldr' (\x acc -> if f x == True then x:acc else acc) [] l

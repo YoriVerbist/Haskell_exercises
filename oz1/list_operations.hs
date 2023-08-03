@@ -1,11 +1,13 @@
 module Template where
 
 myProduct :: [Integer] -> Integer
-myProduct []     = 1
-myProduct (x:xs) = x * myProduct xs
+myProduct = foldr (*) 1
 
 insert :: Int -> [Int] -> [Int]
-insert num [] = [num]
-insert num (x:xs) 
-    | num <= x = num:x:xs
-    | otherwise = xs  
+insert n [] = [n]
+insert n (x:xs)
+    | n <= x = n:x:xs
+    | otherwise = x : insert n xs
+
+myLast :: [Int] -> Int
+myLast l = foldl (\_ x -> x) 0 l
